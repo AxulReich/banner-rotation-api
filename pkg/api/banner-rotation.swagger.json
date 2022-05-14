@@ -1,0 +1,242 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "banner-rotation.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/add-banner": {
+      "post": {
+        "operationId": "BannerRotation_AddBannerDisplay",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/banner_rotationAddBannerDisplayResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/banner_rotationAddBannerDisplayRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BannerRotation"
+        ]
+      }
+    },
+    "/v1/delete-banner": {
+      "delete": {
+        "operationId": "BannerRotation_DeleteBannerDisplay",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/banner_rotationDeleteBannerDisplayResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bannerID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "slotID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "BannerRotation"
+        ]
+      }
+    },
+    "/v1/get-banner": {
+      "get": {
+        "operationId": "BannerRotation_GetBannerDisplay",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/banner_rotationGetBannerDisplayRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slotID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "socialGroup",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "BannerRotation"
+        ]
+      }
+    },
+    "/v1/track-banner": {
+      "post": {
+        "operationId": "BannerRotation_TrackClick",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/banner_rotationTrackClickResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/banner_rotationTrackClickRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BannerRotation"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "banner_rotationAddBannerDisplayRequest": {
+      "type": "object",
+      "properties": {
+        "bannerID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "slotID": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "banner_rotationAddBannerDisplayResponse": {
+      "type": "object"
+    },
+    "banner_rotationDeleteBannerDisplayResponse": {
+      "type": "object"
+    },
+    "banner_rotationGetBannerDisplayRequest": {
+      "type": "object",
+      "properties": {
+        "slotID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "socialGroup": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "banner_rotationTrackClickRequest": {
+      "type": "object",
+      "properties": {
+        "bannerID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "slotID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "socialGroup": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "banner_rotationTrackClickResponse": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

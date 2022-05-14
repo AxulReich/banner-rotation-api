@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+package banner_rotation;
+
+import "google/api/annotations.proto";
+import "github.com/envoyproxy/protoc-gen-validate/validate/validate.proto";
+
+
+message AddBannerDisplayRequest {
+  int64 bannerID = 1 [(validate.rules).int64.gt = 0];
+  int64 slotID = 2 [(validate.rules).int64.gt = 0];
+}
+
+message AddBannerDisplayResponse {}
+
+message DeleteBannerDisplayRequest {
+  int64 bannerID = 1 [(validate.rules).int64.gt = 0];
+  int64 slotID = 2 [(validate.rules).int64.gt = 0];
+}
+
+message DeleteBannerDisplayResponse {}
+
+message TrackClickRequest {
+  int64 bannerID = 1 [(validate.rules).int64.gt = 0];
+  int64 slotID = 2 [(validate.rules).int64.gt = 0];
+  int64 socialGroup = 3 [(validate.rules).int64.gt = 0];
+}
+
+message TrackClickResponse {}
+
+message GetBannerDisplayRequest {
+  int64 slotID = 1 [(validate.rules).int64.gt = 0];
+  int64 socialGroup = 2 [(validate.rules).int64.gt = 0];
+}
+
+message GetBannerDisplayResponse {
+  int64 bannerID = 1 [(validate.rules).int64.gt = 0];
+}
+
+service BannerRotation {
+  rpc AddBannerDisplay(AddBannerDisplayRequest) returns (AddBannerDisplayResponse) {
+    option (google.api.http) = {
+      post: "/v1/add-banner"
+      body: "*"
+    };
+  }
+  rpc DeleteBannerDisplay(DeleteBannerDisplayRequest) returns (DeleteBannerDisplayResponse) {
+    option (google.api.http) = {
+      delete: "/v1/delete-banner"
+    };
+  }
+  rpc TrackClick(TrackClickRequest) returns (TrackClickResponse) {
+    option (google.api.http) = {
+      post: "/v1/track-banner"
+      body: "*"
+    };
+  }
+  rpc GetBannerDisplay(GetBannerDisplayRequest) returns (GetBannerDisplayRequest) {
+    option (google.api.http) = {
+      get: "/v1/get-banner"
+    };
+  }
+}
